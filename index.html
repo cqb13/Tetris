@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+  <head>
+    <title>Tetris</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tetris" />
+    <script src="js/loop.js"></script>
+    <script src="js/tetris.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/shape.js"></script>
+    <script src="js/key.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1 class="title shadow">TETRIS</h1>
+    <div><div id="container" class="shadow"></div></div>
+    <script>
+      var tetris = new Tetris();
+      document.getElementById("container");
+      tetris.create(container);
+    </script>
+  </body>
+</html>
