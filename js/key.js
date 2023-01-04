@@ -1,6 +1,6 @@
-const RELEASED     = 0;
+const RELEASED = 0;
 const JUST_PRESSED = 1;
-const PRESSED      = 2;
+const PRESSED = 2;
 class Key {
 
     constructor(tgtHoldDownTime) {
@@ -9,8 +9,8 @@ class Key {
         this.setState(RELEASED);
     }
 
-    setState = function(state) {
-        switch(state) {
+    setState = function (state) {
+        switch (state) {
             case JUST_PRESSED:
             case PRESSED:
                 this.state = state;
@@ -22,23 +22,23 @@ class Key {
         this.holdDownTime = 0;
     }
 
-    isReleased = function() {
+    isReleased = function () {
         return this.state == RELEASED;
     }
 
-    isJustPressed = function() {
+    isJustPressed = function () {
         return this.state == JUST_PRESSED;
     }
 
-    isPressed = function() {
+    isPressed = function () {
         return this.state == PRESSED;
     }
 
-    isHoldDown = function() {
+    isHoldDown = function () {
         return this.isPressed && this.holdDownTime > this.tgtHoldDownTime;
     }
 
-    addHoldDownTime = function(time) {
+    addHoldDownTime = function (time) {
         this.holdDownTime += time;
     }
 }

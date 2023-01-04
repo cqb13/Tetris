@@ -116,18 +116,19 @@ class Tetris extends Loop {
 
     if (this.currentShape == null || this.currentShape.remove) {
       let lines = this.grid.checkLines();
+      this.linesCleared += lines;
       if (lines > 0) {
         this.score += lines * 10;
-        this.linesCleared++;
-        if (this.linesCleared > this.level * 10) {
+
+        if (this.linesCleared == this.level * 10) {
           this.level++;
         }
 
         this.currentShape = this.nextShape;
         // Generate a new nextShape
         this.generateNextShape();
-        console.log(`First: ${this.nextShape}`)
-        console.log(`First: ${this.currentShape}`)
+        //console.log(`First: ${this.nextShape}`)
+        //console.log(`First: ${this.currentShape}`)
       }
 
       let shapeId = Math.floor(Math.random() * 7);
@@ -135,8 +136,8 @@ class Tetris extends Loop {
       this.currentShape.x = 3;
       this.time = 0;
 
-      console.log(`Second: ${this.nextShape}`)
-      console.log(`Second: ${this.currentShape}`)
+      //console.log(`Second: ${this.nextShape}`)
+      //console.log(`Second: ${this.currentShape}`)
 
       if (
         !this.currentShape.canMove(this.currentShape.x, this.currentShape.y)
