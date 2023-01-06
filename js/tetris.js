@@ -120,7 +120,7 @@ class Tetris extends Loop {
       if (lines > 0) {
         this.score += lines * 10;
 
-        if (this.linesCleared == this.level * 10) {
+        if (this.linesCleared >= this.level * 10) {
           this.level++;
         }
 
