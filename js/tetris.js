@@ -81,7 +81,23 @@ class Tetris extends Loop {
         }
         prevent = true;
         break;
+      case 65:
+        if (down && this.keyLeft.isReleased()) {
+          this.keyLeft.setState(JUST_PRESSED);
+        } else if (!down) {
+          this.keyLeft.setState(RELEASED);
+        }
+        prevent = true;
+        break;
       case 39:
+        if (down && this.keyRight.isReleased()) {
+          this.keyRight.setState(JUST_PRESSED);
+        } else if (!down) {
+          this.keyRight.setState(RELEASED);
+        }
+        prevent = true;
+        break;
+      case 68:
         if (down && this.keyRight.isReleased()) {
           this.keyRight.setState(JUST_PRESSED);
         } else if (!down) {
@@ -97,7 +113,23 @@ class Tetris extends Loop {
         }
         prevent = true;
         break;
+      case 83:
+        if (down && this.keyDown.isReleased()) {
+          this.keyDown.setState(JUST_PRESSED);
+        } else if (!down) {
+          this.keyDown.setState(RELEASED);
+        }
+        prevent = true;
+        break;
       case 38:
+        if (down && this.keyUp.isReleased()) {
+          this.keyUp.setState(JUST_PRESSED);
+        } else if (!down) {
+          this.keyUp.setState(RELEASED);
+        }
+        prevent = true;
+        break;
+      case 87:
         if (down && this.keyUp.isReleased()) {
           this.keyUp.setState(JUST_PRESSED);
         } else if (!down) {
