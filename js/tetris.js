@@ -35,6 +35,7 @@ class Tetris extends Loop {
     this.keyRight = new Key(0.15);
     this.keyDown = new Key(0.2);
     this.keyUp = new Key();
+    this.paused = false;
   }
 
   create = function (parent) {
@@ -137,6 +138,14 @@ class Tetris extends Loop {
         }
         prevent = true;
         break;
+      case 80:
+        this.paused = !this.paused;
+        prevent = true;
+        break;
+      case 82:
+        this.restart();
+        prevent = true;
+        break;
     }
     if (prevent) e.preventDefault();
   };
@@ -157,19 +166,13 @@ class Tetris extends Loop {
         }
 
         this.currentShape = this.nextShape;
-        // Generate a new nextShape
         this.generateNextShape();
-        //console.log(`First: ${this.nextShape}`)
-        //console.log(`First: ${this.currentShape}`)
       }
 
       let shapeId = Math.floor(Math.random() * 7);
       this.currentShape = new Shape(SHAPES[shapeId], shapeId + 1, this.grid);
       this.currentShape.x = 3;
       this.time = 0;
-
-      //console.log(`Second: ${this.nextShape}`)
-      //console.log(`Second: ${this.currentShape}`)
 
       if (
         !this.currentShape.canMove(this.currentShape.x, this.currentShape.y)
@@ -180,7 +183,7 @@ class Tetris extends Loop {
       }
     }
 
-    if (this.time > 1) {
+    if (this.time > 1 && !this.paused) {
       this.time = 0;
       this.currentShape.moveDown();
     } else {
@@ -222,7 +225,7 @@ class Tetris extends Loop {
     let colorIndex = Math.floor(Math.random() * COLORS.length);
     let color = COLORS[colorIndex];
     this.nextShape = new Shape(shape, color);
-  }
+  };
 
   render = function (ctx) {
     ctx.fillStyle = "#040404"; // black

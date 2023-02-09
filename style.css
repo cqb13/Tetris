@@ -10,22 +10,19 @@ body {
   padding: 5px;
   box-sizing: border-box;
   display: grid;
-  grid-template-rows: 40px 1fr 25px;
+  grid-template-rows: 60px 1fr 45px;
   text-align: center;
   overflow: hidden;
   background-color: #444;
 }
 
-.title {
-  display: inline-block;
-  margin: 0px;
-  color: #476bbe;
-  font-size: bold;
+span {
+  color: #496bbe;
 }
 
 #container {
   display: inline-block;
-  width: calc((100vh - 85px) * 0.47);
+  width: calc((100vh - 60px) * 0.47);
   height: auto;
 }
 
