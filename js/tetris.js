@@ -139,7 +139,9 @@ class Tetris extends Loop {
         prevent = true;
         break;
       case 80:
-        this.paused = !this.paused;
+        if (down && !this.gameOver) {
+          this.paused = !this.paused;
+        }
         prevent = true;
         break;
       case 82:
@@ -183,11 +185,13 @@ class Tetris extends Loop {
       }
     }
 
-    if (this.time > 1 && !this.paused) {
-      this.time = 0;
-      this.currentShape.moveDown();
-    } else {
-      this.time += deltaTime * this.level;
+    if (!this.paused) {
+      if (this.time > 1) {
+        this.time = 0;
+        this.currentShape.moveDown();
+      } else {
+        this.time += deltaTime * this.level;
+      }
     }
 
     if (this.keyLeft.isJustPressed() || this.keyLeft.isHoldDown()) {
@@ -262,5 +266,6 @@ class Tetris extends Loop {
     this.score = 0;
     this.linesCleared = 0;
     this.gameOver = false;
+    this.paused = false;
   };
 }
