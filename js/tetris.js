@@ -38,7 +38,7 @@ class Tetris extends Loop {
     this.paused = false;
   }
 
-  create = function (parent) {
+  create = function(parent) {
     this.canvas = document.createElement("canvas");
     this.canvas.style.width = "100%";
     this.canvas.style.height = "100%";
@@ -48,7 +48,7 @@ class Tetris extends Loop {
     window.addEventListener("keyup", this.inputHandler.bind(this), false);
 
     let self = this;
-    let resize = function () {
+    let resize = function() {
       self.canvas.width = dw;
       self.canvas.height = dh;
     };
@@ -57,13 +57,13 @@ class Tetris extends Loop {
     this.running = true;
 
     this.restart();
-    this.start(function (dt) {
+    this.start(function(dt) {
       self.update(dt);
       self.render(self.canvas.getContext("2d"));
     }, 60);
   };
 
-  inputHandler = function (e) {
+  inputHandler = function(e) {
     let code = e.keyCode;
     let down = e.type == "keydown";
     let prevent = false;
@@ -152,7 +152,7 @@ class Tetris extends Loop {
     if (prevent) e.preventDefault();
   };
 
-  update = function (deltaTime) {
+  update = function(deltaTime) {
     if (this.gameOver) {
       return;
     }
@@ -194,36 +194,38 @@ class Tetris extends Loop {
       }
     }
 
-    if (this.keyLeft.isJustPressed() || this.keyLeft.isHoldDown()) {
-      this.keyLeft.setState(PRESSED);
-      this.currentShape.moveLeft();
-    } else if (this.keyLeft.isPressed()) {
-      this.keyLeft.addHoldDownTime(deltaTime * this.level);
-    }
+    if (!this.paused) {
+      if (this.keyLeft.isJustPressed() || this.keyLeft.isHoldDown()) {
+        this.keyLeft.setState(PRESSED);
+        this.currentShape.moveLeft();
+      } else if (this.keyLeft.isPressed()) {
+        this.keyLeft.addHoldDownTime(deltaTime * this.level);
+      }
 
-    if (this.keyRight.isJustPressed() || this.keyRight.isHoldDown()) {
-      this.keyRight.setState(PRESSED);
-      this.currentShape.moveRight();
-    } else if (this.keyRight.isPressed()) {
-      this.keyRight.addHoldDownTime(deltaTime * this.level);
-    }
+      if (this.keyRight.isJustPressed() || this.keyRight.isHoldDown()) {
+        this.keyRight.setState(PRESSED);
+        this.currentShape.moveRight();
+      } else if (this.keyRight.isPressed()) {
+        this.keyRight.addHoldDownTime(deltaTime * this.level);
+      }
 
-    if (this.keyDown.isJustPressed() || this.keyDown.isHoldDown()) {
-      this.keyDown.setState(PRESSED);
-      this.time = 0;
-      this.currentShape.moveDown();
-      this.score++;
-    } else if (this.keyDown.isPressed()) {
-      this.keyDown.addHoldDownTime(deltaTime * 10 * this.level);
-    }
+      if (this.keyDown.isJustPressed() || this.keyDown.isHoldDown()) {
+        this.keyDown.setState(PRESSED);
+        this.time = 0;
+        this.currentShape.moveDown();
+        this.score++;
+      } else if (this.keyDown.isPressed()) {
+        this.keyDown.addHoldDownTime(deltaTime * 10 * this.level);
+      }
 
-    if (this.keyUp.isJustPressed()) {
-      this.keyUp.setState(Key.PRESSED);
-      this.currentShape.rotateRight();
+      if (this.keyUp.isJustPressed()) {
+        this.keyUp.setState(Key.PRESSED);
+        this.currentShape.rotateRight();
+      }
     }
   };
 
-  generateNextShape = function () {
+  generateNextShape = function() {
     let shapeIndex = Math.floor(Math.random() * SHAPES.length);
     let shape = SHAPES[shapeIndex];
     let colorIndex = Math.floor(Math.random() * COLORS.length);
@@ -231,7 +233,7 @@ class Tetris extends Loop {
     this.nextShape = new Shape(shape, color);
   };
 
-  render = function (ctx) {
+  render = function(ctx) {
     ctx.fillStyle = "#040404"; // black
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -254,11 +256,11 @@ class Tetris extends Loop {
     }
   };
 
-  dispose = function () {
+  dispose = function() {
     this.stop();
   };
 
-  restart = function () {
+  restart = function() {
     this.grid = new Grid(10, 20);
     this.currentShape = null;
     this.nextShape = null;
